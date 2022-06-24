@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @NoArgsConstructor
@@ -14,7 +15,7 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 public class Payment extends BaseEntity {
 
-    @NotEmpty
+    @NotNull
     private Double amount;
 
     @ManyToOne
