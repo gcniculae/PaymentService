@@ -12,6 +12,7 @@ public class PaymentConverter extends BaseConverter<Payment, PaymentDto> {
     public PaymentDto convertEntityToDto(Payment payment) {
         PaymentDto paymentDto = new PaymentDto();
         BeanUtils.copyProperties(payment, paymentDto);
+        paymentDto.setClientId(payment.getClient().getId());
 
         return paymentDto;
     }
