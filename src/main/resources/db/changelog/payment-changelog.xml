@@ -18,6 +18,9 @@
             <column name="client_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
+            <column name="amount" type="double">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 
@@ -30,12 +33,15 @@
         </preConditions>
         <insert tableName="payment">
             <column name="client_id" value="1"/>
+            <column name="amount" value="50.0"/>
         </insert>
         <insert tableName="payment">
             <column name="client_id" value="2"/>
+            <column name="amount" value="35.5"/>
         </insert>
         <insert tableName="payment">
             <column name="client_id" value="1"/>
+            <column name="amount" value="72.9"/>
         </insert>
     </changeSet>
 </databaseChangeLog>
