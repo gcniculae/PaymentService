@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet id="payment-1" author="George Niculae">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists schemaName="payment_service" catalogName="payment_service" tableName="payment"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="payment">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="client_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="payment-2" author="George Niculae">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM payment;
+            </sqlCheck>
+        </preConditions>
+        <insert tableName="payment">
+            <column name="client_id" value="1"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
