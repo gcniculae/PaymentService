@@ -11,4 +11,5 @@ public class ClientDto extends BaseEntityDto {
 
     private String firstName;
     private String lastName;
+    private String phoneNumber;
 }
