@@ -72,4 +72,12 @@ public class PaymentService {
 
         paymentRepository.deleteById(paymentById.getId());
     }
+
+    public void deletePaymentsByClientId(Long clientId) {
+        List<Payment> paymentsByClientId = findPaymentsByClientId(clientId);
+
+        for (Payment payment : paymentsByClientId) {
+            deletePaymentById(payment.getId());
+        }
+    }
 }
