@@ -72,9 +72,14 @@ public class PaymentRestController {
         return ResponseEntity.ok(paymentConverter.convertEntityToDto(updatedPayment));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<PaymentDto> deletePayment(@PathVariable("id") Long id) {
-        paymentService.deletePaymentById(id);
+    @DeleteMapping
+    public ResponseEntity<PaymentDto> deletePayment(@RequestParam(name = "id", required = false) Long id,
+                                                    @RequestParam(name = "clientId", required = false) Long clientId) {
+        if (id != null) {
+            paymentService.deletePaymentById(id);
+        } else if (clientId != null) {
+            paymentService.deletePaymentsByClientId(clientId);
+        }
 
         return ResponseEntity.noContent().build();
     }
