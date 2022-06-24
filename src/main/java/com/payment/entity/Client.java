@@ -16,6 +16,7 @@ public class Client extends BaseEntity {
 
     private String firstName;
     private String lastName;
+    private String phoneNumber;
 
     @OneToMany(mappedBy = "client")
     private List<Payment> payments;
