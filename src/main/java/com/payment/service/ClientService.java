@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ClientService {
@@ -28,14 +30,10 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
-    public Client findClientById(Long id) {
-        Optional<Client> clientOptional = clientRepository.findById(id);
-
-        if (clientOptional.isPresent()) {
-            return clientOptional.get();
-        } else {
-            throw new NotFoundException("No such client found.", "client.not.found");
-        }
+    public List<Client> findClientsById(List<Long> ids) {
+        return ids.stream()
+                .map(this::findClientById)
+                .collect(Collectors.toList());
     }
 
     public List<Client> findClientsByFirstName(String firstName) {
@@ -44,6 +42,16 @@ public class ClientService {
 
     public List<Client> findClientsByLastName(String lastName) {
         return clientRepository.findByLastName(lastName);
+    }
+
+    public Client findClientById(Long id) {
+        Optional<Client> clientOptional = clientRepository.findById(id);
+
+        if (clientOptional.isPresent()) {
+            return clientOptional.get();
+        } else {
+            throw new NotFoundException("No such client found.", "client.not.found");
+        }
     }
 
     public Client findClientByPhoneNumber(String phoneNumber) {
