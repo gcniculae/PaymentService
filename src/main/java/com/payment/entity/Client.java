@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Entity
@@ -14,8 +15,13 @@ import java.util.List;
 @Setter
 public class Client extends BaseEntity {
 
+    @NotEmpty
     private String firstName;
+
+    @NotEmpty
     private String lastName;
+
+    @NotEmpty
     private String phoneNumber;
 
     @OneToMany(mappedBy = "client")
