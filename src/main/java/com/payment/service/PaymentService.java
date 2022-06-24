@@ -1,14 +1,11 @@
 package com.payment.service;
 
-import com.payment.dto.PaymentDto;
 import com.payment.entity.Payment;
 import com.payment.exception.NotFoundException;
 import com.payment.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -59,14 +56,8 @@ public class PaymentService {
         }
     }
 
-    public Payment findPaymentByClientId(Long id) {
-        Optional<Payment> optionalPayment = paymentRepository.findByClientId(id);
-
-        if (optionalPayment.isPresent()) {
-            return optionalPayment.get();
-        } else {
-            throw new NotFoundException("No such payment found.", "payment.not.found");
-        }
+    public List<Payment> findPaymentsByClientId(Long id) {
+        return paymentRepository.findByClientId(id);
     }
 
     public Payment updatePayment(Long id, Payment payment, Long clientId) {
