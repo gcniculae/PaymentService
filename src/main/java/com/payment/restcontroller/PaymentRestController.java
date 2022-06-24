@@ -30,7 +30,8 @@ public class PaymentRestController {
     public ResponseEntity<List<PaymentDto>> findPayments(@RequestParam(name = "all", required = false, defaultValue = "false") Boolean all,
                                                          @RequestParam(name = "ids", required = false) List<Long> ids,
                                                          @RequestParam(name = "firstName", required = false) String firstName,
-                                                         @RequestParam(name = "lastName", required = false) String lastName) {
+                                                         @RequestParam(name = "lastName", required = false) String lastName,
+                                                         @RequestParam(name = "clientId", required = false) Long clientId) {
         List<Payment> payments = new ArrayList<>();
 
         if (all) {
@@ -41,21 +42,16 @@ public class PaymentRestController {
             payments = paymentService.findPaymentsByClientFirstName(firstName);
         } else if (lastName != null) {
             payments = paymentService.findPaymentsByClientLastName(lastName);
+        } else if (clientId != null) {
+            payments = paymentService.findPaymentsByClientId(clientId);
         }
 
         return ResponseEntity.ok(paymentConverter.convertEntityListToDtoList(payments));
     }
 
-    @GetMapping(path = "/single")
-    public ResponseEntity<PaymentDto> findPayment(@RequestParam(name = "id", required = false) Long id,
-                                                  @RequestParam(name = "clientId", required = false) Long clientId) {
-        Payment payment = new Payment();
-
-        if (id != null) {
-            payment = paymentService.findPaymentById(id);
-        } else if (clientId != null) {
-            payment = paymentService.findPaymentByClientId(id);
-        }
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<PaymentDto> findPayment(@PathVariable("id") Long id) {
+        Payment payment = paymentService.findPaymentById(id);
 
         return ResponseEntity.ok(paymentConverter.convertEntityToDto(payment));
     }
