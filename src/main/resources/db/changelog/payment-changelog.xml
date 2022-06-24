@@ -31,5 +31,11 @@
         <insert tableName="payment">
             <column name="client_id" value="1"/>
         </insert>
+        <insert tableName="payment">
+            <column name="client_id" value="2"/>
+        </insert>
+        <insert tableName="payment">
+            <column name="client_id" value="1"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>
