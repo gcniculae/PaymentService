@@ -24,24 +24,24 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="payment-2" author="George Niculae">
-        <preConditions onFail="MARK_RAN">
-            <sqlCheck expectedResult="0">
-                SELECT COUNT(*)
-                FROM payment;
-            </sqlCheck>
-        </preConditions>
-        <insert tableName="payment">
-            <column name="client_id" value="1"/>
-            <column name="amount" value="50.0"/>
-        </insert>
-        <insert tableName="payment">
-            <column name="client_id" value="2"/>
-            <column name="amount" value="35.5"/>
-        </insert>
-        <insert tableName="payment">
-            <column name="client_id" value="1"/>
-            <column name="amount" value="72.9"/>
-        </insert>
-    </changeSet>
+<!--    <changeSet id="payment-2" author="George Niculae">-->
+<!--        <preConditions onFail="MARK_RAN">-->
+<!--            <sqlCheck expectedResult="0">-->
+<!--                SELECT COUNT(*)-->
+<!--                FROM payment;-->
+<!--            </sqlCheck>-->
+<!--        </preConditions>-->
+<!--        <insert tableName="payment">-->
+<!--            <column name="client_id" value="1"/>-->
+<!--            <column name="amount" value="50.0"/>-->
+<!--        </insert>-->
+<!--        <insert tableName="payment">-->
+<!--            <column name="client_id" value="2"/>-->
+<!--            <column name="amount" value="35.5"/>-->
+<!--        </insert>-->
+<!--        <insert tableName="payment">-->
+<!--            <column name="client_id" value="1"/>-->
+<!--            <column name="amount" value="72.9"/>-->
+<!--        </insert>-->
+<!--    </changeSet>-->
 </databaseChangeLog>
